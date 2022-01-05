@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlflow # TODO: parameterize this and include project id
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: {{ .Values.spec.destination.namespace }}
+  project: default
+  source:
+    repoURL: {{ .Values.spec.sources.mlflow.repoURL }}
+    targetRevision: {{ .Values.spec.sources.mlflow.targetRevision }}
+    path: {{ .Values.spec.sources.mlflow.path }}
+    helm: {{- toYaml $.Values.spec.sources.mlflow.helm | indent 4 }}

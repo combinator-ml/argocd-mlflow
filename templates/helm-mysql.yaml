@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlflow-mysql # TODO: parameterize this and include project id
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: {{ .Values.spec.destination.namespace }}
+  project: default
+  source:
+    repoURL: {{ .Values.spec.sources.mysql.repoURL }}
+    targetRevision: {{ .Values.spec.sources.mysql.targetRevision }}
+    path: {{ .Values.spec.sources.mysql.path }}
+    helm: {{- toYaml $.Values.spec.sources.mysql.helm | indent 4 }}

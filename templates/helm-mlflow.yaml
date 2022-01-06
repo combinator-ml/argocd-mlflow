@@ -6,6 +6,12 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: {{ .Values.spec.destination.namespace }}

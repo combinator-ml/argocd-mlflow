@@ -39,14 +39,14 @@ spec:
       targetRevision: HEAD
       path: helm-mlflow/mlflow
       helm:
-			  parameters:
-				- name: mlflowfoo
-				  value: mlflowbar
+        parameters:
+        - name: mlflowfoo
+          value: mlflowbar
     mysql:
-      repoURL: https://github.com/combinator-ml/argocd-mlflow
-      targetRevision: HEAD
-      path: ""
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: "8.0.0"
+      chart: mysql
       helm:
-			  parameters:
-				- name: mysqlfoo
-				  value: mysqlbar
+        parameters:
+        - name: mysqlfoo
+          value: mysqlbar

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.spec.jupyter.name }}
+  labels:
+    app: {{ .Values.spec.jupyter.name }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ .Values.spec.jupyter.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.spec.jupyter.name }}
+    spec:
+      containers:
+      - name: {{ .Values.spec.jupyter.name }}
+        image: {{ .Values.spec.jupyter.image }}
+        command: {{ toYaml .Values.spec.jupyter.command }}
+        ports:
+        - name: http
+          containerPort: 8888
+
+# resource "kubernetes_deployment" "jupyter" {
+#   metadata {
+#     name      = local.deployment_name
+#     namespace = var.namespace
+#     labels = {
+#       app = local.app_label
+#     }
+#   }
+
+#   spec {
+#     selector {
+#       match_labels = {
+#         app = local.app_label
+#       }
+#     }
+
+#     template {
+#       metadata {
+#         labels = {
+#           app = local.app_label
+#         }
+#       }
+
+#       spec {
+#         container {
+#           image = var.image
+#           name  = local.name
+#           port {
+#             name           = "http"
+#             container_port = 8888
+#           }
+#           command = var.command
+#         }
+#       }
+#     }
+#   }
+# }

@@ -14,4 +14,5 @@ spec:
     repoURL: {{ .Values.spec.sources.mlflow.repoURL }}
     targetRevision: {{ .Values.spec.sources.mlflow.targetRevision }}
     path: {{ .Values.spec.sources.mlflow.path }}
-    helm: {{- toYaml $.Values.spec.sources.mlflow.helm | indent 4 }}
+    helm:
+{{- toYaml $.Values.spec.sources.mlflow.helm | indent 6 }}

@@ -46,6 +46,7 @@ spec:
       repoURL: https://charts.bitnami.com/bitnami
       targetRevision: "8.0.0"
       chart: mysql
+      path: ""
       helm:
         parameters:
         - name: mysqlfoo

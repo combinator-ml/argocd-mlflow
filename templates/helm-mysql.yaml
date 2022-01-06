@@ -19,6 +19,6 @@ spec:
   source:
     repoURL: {{ .Values.spec.sources.mysql.repoURL }}
     targetRevision: {{ .Values.spec.sources.mysql.targetRevision }}
-    path: {{ .Values.spec.sources.mysql.path }}
+    chart: {{ .Values.spec.sources.mysql.chart }}
     helm:
 {{ toYaml $.Values.spec.sources.mysql.helm | indent 6 }}

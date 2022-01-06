@@ -1,16 +1,16 @@
 spec:
   bucketName: mlflow-artifacts # override this with the appropriate bucket name for the object storage target
+  jupyter:
+    # raw jupyter deployment just for messing around, in the style of Phil's
+    # jupyter combinator component
+    name: jupyter
+    namespace: jupyter
+    image: jupyter/scipy-notebook:python-3.9.2
+    command: ["start-notebook.sh", "--NotebookApp.token=''"]
   destination:
     server: https://kubernetes.default.svc
     namespace: mlflow # override this with project namespace
   sources:
-    jupyter:
-      # raw jupyter deployment just for messing around, in the style of Phil's
-      # jupyter combinator component
-      name: jupyter
-      namespace: jupyter
-      image: jupyter/scipy-notebook:python-3.9.2
-      command: ["start-notebook.sh", "--NotebookApp.token=''"]
     mlflow:
       repoURL: https://github.com/combinator-ml/terraform-k8s-mlflow
       targetRevision: mysql-password-secret-in-chart # branch

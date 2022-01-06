@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Values.spec.jupyter.name }}
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.spec.jupyter.name }}

@@ -36,7 +36,7 @@ spec:
   sources:
     mlflow:
       repoURL: https://github.com/combinator-ml/terraform-k8s-mlflow
-      targetRevision: HEAD
+      targetRevision: mysql-password-secret-in-chart # branch
       path: helm-mlflow/mlflow
       helm:
         parameters:

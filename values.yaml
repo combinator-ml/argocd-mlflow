@@ -48,5 +48,12 @@ spec:
       chart: mysql
       helm:
         parameters:
-        - name: mysqlfoo
-          value: mysqlbar
+        # TODO: generate passwords
+        - name: auth.rootPassword
+          value: mysql123
+        - name: auth.database
+          value: mlflow
+        - name: auth.username
+          value: mlflow
+        - name: auth.password
+          value: mlflow123

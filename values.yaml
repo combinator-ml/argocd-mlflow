@@ -30,6 +30,7 @@
 # }
 
 spec:
+  bucketName: mlflow-artifacts # override this with the appropriate bucket name for the object storage target
   destination:
     server: https://kubernetes.default.svc
     namespace: mlflow # override this with project namespace
@@ -57,7 +58,7 @@ spec:
         - name: s3EndpointUrl
           value: "http://minio.minio.svc.cluster.local:9000"
         - name: defaultArtifactRoot
-          value: "s3://mlflow-artifacts/" # TODO: parameterize this
+          value: "s3://{{ .Values.spec.bucketName }}/"
     mysql:
       repoURL: https://charts.bitnami.com/bitnami
       targetRevision: "8.0.0"

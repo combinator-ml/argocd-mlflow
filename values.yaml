@@ -6,7 +6,18 @@ spec:
     name: jupyter
     namespace: jupyter
     image: jupyter/scipy-notebook:python-3.9.2
-    command: ["start-notebook.sh", "--NotebookApp.token=''"]
+    command: |
+     - "start-notebook.sh"
+     - "--NotebookApp.token=''"
+    env: |
+     - name: MLFLOW_TRACKING_URI
+       value: "http://mlflow.{{ .Values.spec.destination.namespace }}.svc.cluster.local:5000"
+     - name: AWS_ACCESS_KEY_ID
+       value: minio
+     - name: AWS_SECRET_ACCESS_KEY
+       value: minio123
+     - name: MLFLOW_S3_ENDPOINT_URL
+       value: "http://minio.minio.svc.cluster.local:9000"
   destination:
     server: https://kubernetes.default.svc
     namespace: mlflow # override this with project namespace

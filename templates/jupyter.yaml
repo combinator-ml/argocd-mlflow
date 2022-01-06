@@ -18,45 +18,13 @@ spec:
       - name: {{ .Values.spec.jupyter.name }}
         image: {{ .Values.spec.jupyter.image }}
         command:
-{{ toYaml .Values.spec.jupyter.command | indent 8 }}
+{{- with .Values.spec.jupyter.command }}
+{{ tpl . $ | indent 8 }}
+{{- end }}
         ports:
         - name: http
           containerPort: 8888
-
-# resource "kubernetes_deployment" "jupyter" {
-#   metadata {
-#     name      = local.deployment_name
-#     namespace = var.namespace
-#     labels = {
-#       app = local.app_label
-#     }
-#   }
-
-#   spec {
-#     selector {
-#       match_labels = {
-#         app = local.app_label
-#       }
-#     }
-
-#     template {
-#       metadata {
-#         labels = {
-#           app = local.app_label
-#         }
-#       }
-
-#       spec {
-#         container {
-#           image = var.image
-#           name  = local.name
-#           port {
-#             name           = "http"
-#             container_port = 8888
-#           }
-#           command = var.command
-#         }
-#       }
-#     }
-#   }
-# }
+        env:
+{{- with .Values.spec.jupyter.env }}
+{{ tpl . $ | indent 8 }}
+{{- end }}

@@ -38,14 +38,14 @@ spec:
       repoURL: https://github.com/combinator-ml/terraform-k8s-mlflow
       targetRevision: mysql-password-secret-in-chart # branch
       path: helm-mlflow/mlflow
-      helm:
+      helm: |
         parameters:
         - name: backendStore.mysql.username
           value: mlflow
         - name: backendStore.mysql.password
           value: mlflow123
         - name: backendStore.mysql.host
-          value: "mlflow-mysql.svc.cluster.local"
+          value: "mlflow-mysql.{{ .Values.spec.destination.namespace }}.svc.cluster.local"
         - name: backendStore.mysql.port
           value: "3306"
         - name: backendStore.mysql.database
@@ -62,7 +62,7 @@ spec:
       repoURL: https://charts.bitnami.com/bitnami
       targetRevision: "8.0.0"
       chart: mysql
-      helm:
+      helm: |
         parameters:
         # TODO: generate passwords
         - name: auth.rootPassword

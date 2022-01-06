@@ -21,4 +21,6 @@ spec:
     targetRevision: {{ .Values.spec.sources.mysql.targetRevision }}
     chart: {{ .Values.spec.sources.mysql.chart }}
     helm:
-{{ toYaml $.Values.spec.sources.mysql.helm | indent 6 }}
+{{- with .Values.spec.sources.mysql.helm }}
+{{ tpl . $ | indent 6 }}
+{{- end }}

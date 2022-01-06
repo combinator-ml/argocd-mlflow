@@ -15,4 +15,4 @@ spec:
     targetRevision: {{ .Values.spec.sources.mysql.targetRevision }}
     path: {{ .Values.spec.sources.mysql.path }}
     helm:
-{{- toYaml $.Values.spec.sources.mysql.helm | indent 6 }}
+{{ toYaml $.Values.spec.sources.mysql.helm | indent 6 }}

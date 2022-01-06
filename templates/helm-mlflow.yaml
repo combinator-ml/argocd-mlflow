@@ -15,4 +15,4 @@ spec:
     targetRevision: {{ .Values.spec.sources.mlflow.targetRevision }}
     path: {{ .Values.spec.sources.mlflow.path }}
     helm:
-{{- toYaml $.Values.spec.sources.mlflow.helm | indent 6 }}
+{{ toYaml $.Values.spec.sources.mlflow.helm | indent 6 }}

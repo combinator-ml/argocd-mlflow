@@ -1,5 +1,7 @@
 spec:
   bucketName: mlflow-artifacts # override this with the appropriate bucket name for the object storage target
+  accessKeyId: override-me # for now, override with actual s3 credentials, see comment in reconcileS3
+  secretAccessKey: override-me
   jupyter:
     # raw jupyter deployment just for messing around, in the style of Phil's
     # jupyter combinator component
@@ -13,11 +15,11 @@ spec:
      - name: MLFLOW_TRACKING_URI
        value: "http://mlflow.{{ .Values.spec.destination.namespace }}.svc.cluster.local:5000"
      - name: AWS_ACCESS_KEY_ID
-       value: minio
+       value: {{ .Values.spec.accessKeyId }}
      - name: AWS_SECRET_ACCESS_KEY
-       value: minio123
+       value: {{ .Values.spec.secretAccessKey }}
      - name: MLFLOW_S3_ENDPOINT_URL
-       value: "http://minio.minio.svc.cluster.local:9000"
+       value: "http://minio.minio.svc.cluster.local:9000" # TODO: parameterize based on configured storage target
      - name: GRANT_SUDO
        value: "yes"
   destination:
@@ -41,9 +43,9 @@ spec:
         - name: backendStore.mysql.database
           value: "mlflow"
         - name: awsAccessKeyId
-          value: "minio"
+          value: {{ .Values.spec.accessKeyId }}
         - name: awsSecretAccessKey
-          value: "minio123"
+          value: {{ .Values.spec.secretAccessKey }}
         - name: s3EndpointUrl
           value: "http://minio.minio.svc.cluster.local:9000"
         - name: defaultArtifactRoot

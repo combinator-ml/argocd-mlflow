@@ -17,6 +17,8 @@ spec:
       containers:
       - name: {{ .Values.spec.jupyter.name }}
         image: {{ .Values.spec.jupyter.image }}
+        securityContext:
+          runAsUser: 0
         command:
 {{- with .Values.spec.jupyter.command }}
 {{ tpl . $ | indent 8 }}

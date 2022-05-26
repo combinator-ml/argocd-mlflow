@@ -7,7 +7,7 @@ spec:
     # jupyter combinator component
     name: jupyter
     namespace: jupyter
-    image: jupyter/scipy-notebook:python-3.9.2
+    image: jupyter/scipy-notebook:python-3.9.12
     command: |
      - "start-notebook.sh"
      - "--NotebookApp.token=''"
